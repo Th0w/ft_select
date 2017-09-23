@@ -1,0 +1,6 @@
+[submodule "lib/ft_mem"]
+	path = lib/ft_mem
+	url = https://github.com/th0w/ft_mem.git
+[submodule "lib/ft_clist"]
+	path = lib/ft_clist
+	url = https://github.com/th0w/ft_clist.git
