@@ -10,3 +10,7 @@ int				ft_intptrcmp(void *lhs, void *rhs)
 	return (((t_ptr *)lhs)->key - *((int *)(char *)rhs));
 }
 
+int				ft_keycmp(void *lhs, void *rhs)
+{
+	return (((t_ptr *)lhs)->key - *((char *)rhs));
+}

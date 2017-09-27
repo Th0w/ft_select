@@ -36,30 +36,58 @@ int				show_keys(t_btree *handlers)
 	}
 }
 
-int				main(int ac, char **av)
+int				main_loop(void)
 {
 	t_clist		*args;
+	t_env		*env;
+	char		*buffer[4];
+	t_btree		*node;
+	size_t		ret;
+
+	env = ft_sel_getenv();
+	args = env->args;
+	env->hovered = (t_arg *)(args->content);
+	ft_print_args(env, args);
+	while (1)
+	{
+		node = NULL;
+		*((int *)buffer) = 0;
+		if ((ret = read(0, buffer, 3)) == (size_t)-1)
+			return (ft_error("Could not read.\n", 3) | ft_sel_exit());
+		node = btree_search(env->actions, (void *)buffer, &ft_keycmp);
+		if (node != NULL)
+		{
+			((t_ptr *)(node->content))->ptr();
+			ft_print_args(env, args);
+		}
+		else
+			dprintf(2, "No handler for this key!\n");
+	}
+	ft_sel_exit();
+}
+
+int				main(int ac, char **av)
+{
 	char		*name;
 	t_term		new;
-	int			ret;
-	t_btree		*btree_handlers;
+	t_env		*env;
 
+	if (ac == 1)
+		return (0);
+	env = ft_sel_getenv();
 	if ((name = getenv(FT_TERM)) == NULL)
 		return (ft_error(FT_NOENV, FT_NOENV_CODE));
 	if (tgetent(0, name) == ERR)
 		return (1);
-	btree_handlers = NULL;
-	if (ft_add_handlers(&btree_handlers) == 0)
-		return (1);
 	ft_change_term(&new);
+	if (ft_add_actions(&env->actions) == 0
+		|| ft_add_handlers(&env->handlers) == 0)
+		return (ft_error("Could not set actions\n", 4) | ft_sel_exit());;
 	signal(SIGINT, &ft_sigexit);
 	signal(SIGTSTP, &ft_sigexit);
-	if ((ret = show_keys(btree_handlers)) != 0)
-		return (ret);
-	return (0);
-	if (ac == 1)
-		return (ft_error("No args given\n", 1));
-	if ((args = ft_clist_fromarr((void **)(av + 1))) == NULL)
-		return (ft_error(FT_MEMALLOC, FT_MEMALLOC_CODE));
+	if ((env->args = ft_clist_arg_to_list(ac - 1, av + 1)) == NULL)
+		return (ft_error(FT_MEMALLOC, FT_MEMALLOC_CODE) | ft_sel_exit());
+	env->arg_per_line = env->col / (env->widest + 4);
+	main_loop();
 	return (0);
 }

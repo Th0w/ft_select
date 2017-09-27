@@ -1,5 +1,6 @@
 #include "ft_select.h"
 
-void 			hand_return(void) { printf("Pressed return\n"); }
-void 			hand_cancel(void) { printf("Pressed cancel\n"); }
-void 			hand_space(void) { printf("Pressed space\n"); }
+void			ft_handle_esc(void) { printf("Pressed esc\n"); }
+void			ft_handle_nl(void) { printf("Pressed return\n"); }
+void			ft_handle_sp(void) { printf("Pressed space\n"); }
+void			ft_handle_del(void) { printf("Pressed cancel\n"); }

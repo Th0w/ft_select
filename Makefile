@@ -59,7 +59,10 @@ ITEM:=\
 	callback_create.o\
 	move.o\
 	selection.o\
+	ft_clist_bridge.o\
 	ft_intcmp.o\
+	ft_sel_args.o\
+	ft_sel_env.o\
 	helpers.o\
 	main.o\
 	signals.o\

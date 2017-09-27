@@ -7,6 +7,8 @@
 # include <unistd.h> //
 # include <stdio.h> //
 
+# include <sys/ioctl.h>
+
 # include "ft_mem.h"
 # include "ft_clist.h"
 # include "ft_btree.h"
@@ -22,11 +24,18 @@
 # define FTK_DOWN 4348699
 # define FTK_RIGHT 4414235
 # define FTK_LEFT 4479771
+
+# define FTK_D 4
 # define FTK_NL 10
 # define FTK_ESC 27
 # define FTK_SP 32
 # define FTK_BRA 91
 # define FTK_DEL 127
+
+# define FT_SEL_REV ("mr") 
+# define FT_SEL_CLR ("me") 
+# define FT_SEL_ULON ("us")
+# define FT_SEL_ULOFF ("ue")
 
 typedef void			(*t_keyptr)();
 
@@ -38,19 +47,36 @@ typedef struct			s_ptr
 	t_keyptr			ptr;
 }						t_ptr;
 
+typedef struct			s_arg
+{
+	char				*value;
+	int					selected;
+}						t_arg;
+
 typedef struct			s_env
 {
 	int					init;
-	int					sigint;
+	size_t				widest;
+	u_short				col;
+	u_short				row;
+	t_arg				*hovered;
+	int					curr;
+	int					arg_per_line;
+	int					cnt;
+	t_clist				*args;
 	t_term				old;
+	t_btree				*actions;
+	t_btree				*handlers;
 }						t_env;
 
 int						ft_intcmp(int lhs, int rhs);
 int						ft_intptrcmp(void *lhs, void *rhs);
+int						ft_keycmp(void *lhs, void *rhs);
 
 void					ft_sigexit(int signo);
 
 int						ft_add_handlers(t_btree **handlers);
+int						ft_add_actions(t_btree **handlers);
 
 int						ft_change_term(t_term *new);
 int						ft_restore_term(void);
@@ -63,8 +89,18 @@ void					ft_mv_up(void);
 void 					ft_mv_down(void);
 void 					ft_mv_right(void);
 void 					ft_mv_left(void);
-void 					ft_hand_return(void);
-void 					ft_hand_cancel(void);
-void 					ft_hand_space(void);
+void					ft_handle_esc(void);
+void					ft_handle_nl(void);
+void 					ft_handle_sp(void);
+void					ft_handle_del(void);
+
+t_clist					*ft_clist_arg_to_list(int ac, char **av);
+t_clist					*ft_clist_move(t_clist *list, int cnt);
+
+size_t					ft_selstrlen(const char *str);
+
+void					ft_toggle_style(char *style, int cnt);
+
+void					ft_print_args(t_env *env, t_clist *head);
 
 #endif
