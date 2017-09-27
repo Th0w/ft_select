@@ -10,3 +10,6 @@
 [submodule "lib/ft_string"]
 	path = lib/ft_string
 	url = https://github.com/th0w/ft_string.git
+[submodule "lib/ft_btree"]
+	path = lib/ft_btree
+	url = https://github.com/th0w/ft_btree.git
