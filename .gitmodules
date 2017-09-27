@@ -4,3 +4,9 @@
 [submodule "lib/ft_clist"]
 	path = lib/ft_clist
 	url = https://github.com/th0w/ft_clist.git
+[submodule "lib/ft_array"]
+	path = lib/ft_array
+	url = https://github.com/th0w/ft_array.git
+[submodule "lib/ft_string"]
+	path = lib/ft_string
+	url = https://github.com/th0w/ft_string.git

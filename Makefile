@@ -31,23 +31,42 @@ FT_MEM_LIB:=-L $(FT_MEM_DIR) -lftmem
 FT_MEM_INC:=-I $(FT_MEM_DIR)/$(INC_D)
 
 ####
+# FT_BTREE
+####
+
+FT_BTREE:=ft_btree
+FT_BTREE_DIR:=$(LIB_D)/$(FT_BTREE)
+FT_BTREE_LIB:=-L $(FT_BTREE_DIR) -lftbtree
+FT_BTREE_INC:=-I $(FT_BTREE_DIR)/$(INC_D)
+
+####
 # DATA VARS
 ####
 
 INCLUDES:=\
 		  $(INC)\
 		  $(FT_MEM_INC)\
-		  $(FT_CLIST_INC)
+		  $(FT_CLIST_INC)\
+		  $(FT_BTREE_INC)
 
 LIBRARIES:=\
 		   $(FT_MEM_LIB)\
-		   $(FT_CLIST_LIB)
+		   $(FT_CLIST_LIB)\
+		   $(FT_BTREE_LIB)\
+		   -lcurses
 
 ITEM:=\
-	main.o
+	callback_create.o\
+	move.o\
+	selection.o\
+	ft_intcmp.o\
+	helpers.o\
+	main.o\
+	signals.o\
+	term_mod.o
 OBJ:=$(addprefix $(OBJ_D)/, $(ITEM))
 
-VPATH:=inc:src
+VPATH:=src:src/callbacks:inc
 
 ####
 # RULES

@@ -1,49 +1,65 @@
 #include <unistd.h>
+#include <stdio.h> //
 
 #include "ft_select.h"
 
-#define FT_TERM ("TERM")
-#define FT_NOENV ("Could not retrieve environment.\n")
-
-# define FT_NOENV_CODE 1
-
-void			print(const char *str)
+int				show_keys(t_btree *handlers)
 {
-	size_t	len;
+	char		buffer[4];
+	t_btree		*node;
+	int			ret;
 
-	len = 0;
-	while (str[len] != '\0')
-		len++;
-	write(1, str, len);
-}
-
-int				ft_error(const char *err_msg, const int err_code)
-{
-	size_t		len;
-	len = 0;
-	while (err_msg[len] != '\0')
-		len++;
-	write(2, err_msg, len);
-	return (err_code);
+	while (1)
+	{
+		node = NULL;
+		*((int *)buffer) = 0;
+		if ((ret = read(0, buffer, 3)) == -1)
+			return (ft_error("Could not read.\n", 3));
+		if (*buffer == 4 || (buffer[0] == 27 && buffer[1] != 91))
+			return (ft_sel_exit());
+		if (buffer[0] == FTK_ESC)
+		{
+			node = btree_search(handlers, (void *)buffer, &ft_intptrcmp);
+			if (node != NULL)
+				((t_ptr *)(node->content))->ptr();
+			else
+				dprintf(2, "No handler for this key!\n");
+		}
+		else if (buffer[0] == FTK_NL)
+			printf("NEWLINE, BITCH\n");
+		else if (buffer[0] == FTK_SP)
+			printf("SPACE, BITCH\n");
+		else if (buffer[0] == FTK_DEL)
+			printf("DEL, BITCH\n");
+		else
+			dprintf(2, "No handler for this key!\n");
+	}
 }
 
 int				main(int ac, char **av)
 {
-	int			i;
 	t_clist		*args;
 	char		*name;
+	t_term		new;
+	int			ret;
+	t_btree		*btree_handlers;
 
 	if ((name = getenv(FT_TERM)) == NULL)
 		return (ft_error(FT_NOENV, FT_NOENV_CODE));
-	print("term name: '");
-	print(name);
-	print("'\n");
-	i = 1;
-	args = NULL;
-	while (i < ac)
-	{
-		ft_clist_append(&args, av[i]);
-		i++;
-	}
+	if (tgetent(0, name) == ERR)
+		return (1);
+	btree_handlers = NULL;
+	if (ft_add_handlers(&btree_handlers) == 0)
+		return (1);
+	ft_change_term(&new);
+	signal(SIGINT, &ft_sigexit);
+	signal(SIGTSTP, &ft_sigexit);
+	if ((ret = show_keys(btree_handlers)) != 0)
+		return (ret);
+	return (0);
+	if (ac == 1)
+		return (ft_error("No args given\n", 1));
+	if ((args = ft_clist_fromarr((void **)(av + 1))) == NULL)
+		return (ft_error(FT_MEMALLOC, FT_MEMALLOC_CODE));
 	return (0);
 }
