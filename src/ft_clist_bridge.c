@@ -22,7 +22,7 @@ t_clist			*ft_clist_arg_to_list(int ac, char **av)
 		if ((tmp = (t_arg *)ft_memalloc(sizeof(t_arg))) == NULL)
 			return (ft_clear_clist(&ret));
 		tmp->value = av[i];
-		if ((len = ft_selstrlen(av[i])) > env->widest)
+		if ((len = ft_strlen(av[i])) > env->widest)
 			env->widest = len;
 		if (ft_clist_append(&ret, tmp) == NULL)
 		{
@@ -31,6 +31,7 @@ t_clist			*ft_clist_arg_to_list(int ac, char **av)
 		}
 		i++;
 	}
+	env->cnt = i;
 	return (ret);
 }
 

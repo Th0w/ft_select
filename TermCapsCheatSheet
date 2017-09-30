@@ -1,0 +1,4 @@
+sc: Save cursor pos
+rc: restore cursor pos
+cd: clear from cursor to bottom
+ce: clear current line

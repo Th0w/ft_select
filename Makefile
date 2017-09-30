@@ -40,6 +40,15 @@ FT_BTREE_LIB:=-L $(FT_BTREE_DIR) -lftbtree
 FT_BTREE_INC:=-I $(FT_BTREE_DIR)/$(INC_D)
 
 ####
+# FT_STRING
+####
+
+FT_STRING:=ft_string
+FT_STRING_DIR:=$(LIB_D)/$(FT_STRING)
+FT_STRING_LIB:=-L $(FT_STRING_DIR) -lftstring
+FT_STRING_INC:=-I $(FT_STRING_DIR)/$(INC_D)
+
+####
 # DATA VARS
 ####
 
@@ -47,16 +56,19 @@ INCLUDES:=\
 		  $(INC)\
 		  $(FT_MEM_INC)\
 		  $(FT_CLIST_INC)\
-		  $(FT_BTREE_INC)
+		  $(FT_BTREE_INC)\
+		  $(FT_STRING_INC)
 
 LIBRARIES:=\
 		   $(FT_MEM_LIB)\
 		   $(FT_CLIST_LIB)\
 		   $(FT_BTREE_LIB)\
+		   $(FT_STRING_LIB)\
 		   -lcurses
 
 ITEM:=\
 	callback_create.o\
+	cursor.o\
 	move.o\
 	selection.o\
 	ft_clist_bridge.o\
