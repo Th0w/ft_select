@@ -51,3 +51,26 @@ t_clist			*ft_clist_move(t_clist *list, int cnt)
 	}
 	return (ret);
 }
+
+char					*ft_clist_tostr_if(t_clist *list, int (*assert)())
+{
+	char				*ret;
+	char				*tmp;
+	t_clist				*curr;
+
+	curr = list;
+	ret = NULL;
+	while (1)
+	{
+		if (assert(curr->content))
+		{
+			tmp = ret;
+			ret = ft_strjoinc(ret, ((t_arg *)(curr->content))->value, ' ');
+			ft_strdel(&tmp);
+		}
+		curr = curr->next;
+		if (curr->next == list)
+			break ;
+	}
+	return (ret);
+}

@@ -13,7 +13,8 @@ static void		ft_print_arg(t_clist *elem, t_env *env)
 		ft_toggle_style(FT_TC_REV);
 	if (selected)
 		ft_toggle_style(FT_TC_ULON);
-	dprintf(0, "%c %-*s %c", selected ? '>' : ' ', (int)env->widest, arg->value, selected ? '<' : ' ');
+	dprintf(0, "%c %-*s %c", selected ? '>' : ' ', (int)env->widest,
+			arg->value, selected ? '<' : ' ');
 	if (selected)
 		ft_toggle_style(FT_TC_ULOFF);
 	if (arg->selected == 1)
@@ -21,19 +22,18 @@ static void		ft_print_arg(t_clist *elem, t_env *env)
 	env->curr++;
 }
 
-void			ft_print_args(t_env *env, t_clist *head)
+void			ft_print_args(t_env *env)
 {
 	t_clist		*curr;
 	int			progress;
 
-	env = ft_sel_getenv();
-	head = env->args;
-	curr = head;
+	ft_toggle_style(FT_TC_CL);
+	curr = env->args;
 	progress = 0;
 	while (1)
 	{
 		ft_print_arg(curr, (void *)env);
-		if (curr->next == head)
+		if (curr->next == env->args)
 			break ;
 		curr = curr->next;
 		progress++;

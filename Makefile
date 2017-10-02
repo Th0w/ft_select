@@ -68,20 +68,20 @@ LIBRARIES:=\
 
 ITEM:=\
 	callback_create.o\
-	cursor.o\
+	ft_style.o\
 	move.o\
 	selection.o\
 	ft_clist_bridge.o\
 	ft_intcmp.o\
-	ft_sel_args.o\
+	ft_print_args.o\
 	ft_sel_env.o\
-	helpers.o\
+	ft_term.o\
+	ft_helpers.o\
 	main.o\
-	signals.o\
-	term_mod.o
+	ft_signals.o
 OBJ:=$(addprefix $(OBJ_D)/, $(ITEM))
 
-VPATH:=src:src/callbacks:inc
+VPATH:=src:src/callbacks:src/bridge:inc
 
 ####
 # RULES

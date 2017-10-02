@@ -11,31 +11,28 @@ void			ft_handle_esc(char *buffer, t_env *env)
 		((t_ptr *)(node->content))->ptr();
 }
 
+static int		is_selected(void *content)
+{
+	return (((t_arg *)content)->selected);
+}
+
 void			ft_handle_nl(char *buffer, t_env *env)
 {
 	int			one;
 	t_clist		*curr;
+	char		*str;
 
 	(void)buffer;
 	one = 0;
 	curr = env->args;
-	while (1)
+	ft_toggle_style("te");
+	ft_toggle_style("ve");
+	if ((str = ft_clist_tostr_if(env->args, &is_selected)) != NULL)
 	{
-		if (((t_arg *)(curr->content))->selected)
-		{
-			if (one)
-				write(1, " ", 1);
-			one = 1;
-			ft_putstr_fd(((t_arg *)(curr->content))->value, 1);
-		}
-		curr = curr->next;
-		if (curr == env->args)
-		{
-			if (one)
-				ft_putstr_fd("\n", 1);
-			ft_sel_exit();
-		}
+		ft_putendl_fd(str, STDOUT_FILENO);
+		ft_strdel(&str);
 	}
+	exit(0);
 }
 
 void			ft_handle_sp(char *buffer, t_env *env)
@@ -51,7 +48,6 @@ void			ft_handle_sp(char *buffer, t_env *env)
 void			ft_handle_del(char *buffer, t_env *env)
 {
 	(void)buffer;
-	(void)env;
 	t_clist		*elem;
 
 	if (env->hovered->next == env->hovered)

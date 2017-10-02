@@ -14,36 +14,16 @@
 # include "ft_btree.h"
 # include "ft_string.h"
 
+# include "ft_termcaps.h"
+
 # define FT_TERM ("TERM")
 # define FT_NOENV ("Could not retrieve environment.\n")
-# define FT_MEMALLOC ("Could not allocate memory.\n")
+# define FT_EMEMALLOC ("Could not allocate memory.\n")
+# define FT_EACT ("Could not create action trees.\n")
+# define FT_ETERM ("Could not find corresponding term.\n")
 
 # define FT_NOENV_CODE 2
 # define FT_MEMALLOC_CODE 3
-
-# define FTK_UP 4283163
-# define FTK_DOWN 4348699
-# define FTK_RIGHT 4414235
-# define FTK_LEFT 4479771
-
-# define FTK_D 4
-# define FTK_NL 10
-# define FTK_ESC 27
-# define FTK_SP 32
-# define FTK_BRA 91
-# define FTK_DEL 127
-
-# define FT_TC_GETMPOS ("\033[6n")
-# define FT_TC_REV ("mr") 
-# define FT_TC_CLR ("me") 
-# define FT_TC_ULON ("us")
-# define FT_TC_ULOFF ("ue")
-# define FT_TC_SC ("sc")
-# define FT_TC_RC ("rc")
-# define FT_TC_CD ("cd")
-# define FT_TC_UP ("UP")
-# define FT_TC_DO ("DO")
-# define FT_TC_CM ("cm")
 
 typedef void			(*t_keyptr)();
 
@@ -67,18 +47,16 @@ typedef struct			s_env
 	size_t				widest;
 	u_short				col;
 	u_short				row;
-	t_clist				*hovered;
-	t_clist				*selected;
 	int					curr;
 	int					arg_per_line;
 	int					line_count;
 	int					cnt;
 	t_clist				*args;
+	t_clist				*hovered;
 	t_term				old;
+	t_term				new;
 	t_btree				*actions;
 	t_btree				*handlers;
-	int					x;
-	int					y;
 }						t_env;
 
 int						ft_intcmp(int lhs, int rhs);
@@ -108,6 +86,7 @@ void					ft_handle_del(char *buffer, t_env *env);
 
 t_clist					*ft_clist_arg_to_list(int ac, char **av);
 t_clist					*ft_clist_move(t_clist *list, int cnt);
+char					*ft_clist_tostr_if(t_clist *list, int (*assert)());
 
 size_t					ft_selstrlen(const char *str);
 
@@ -116,6 +95,11 @@ void					ft_toggle_style_cnt(char *style, int cnt);
 void					ft_move_cursor(int x, int y);
 int						ft_get_cursor_pos(int *x, int *y);
 
-void					ft_print_args(t_env *env, t_clist *head);
+void					ft_print_args(t_env *env);
+
+int						ft_setup_env(int ac, char **av);
+int						ft_toggle_term(int on);
+int						ft_create_term(t_env *env);
+void					ft_addsignal(void);
 
 #endif
