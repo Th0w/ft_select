@@ -8,7 +8,7 @@ void				ft_setenv_dim(u_short *col, u_short *row)
 	ret = ioctl(0, TIOCGWINSZ, &win);
 	if (ret == -1)
 	{
-		printf("Error with current TTY of Standard Output FD\n");
+		ft_putstr_fd(FT_ETTY, STDERR_FILENO);
 		ft_sel_exit();
 		return ;
 	}

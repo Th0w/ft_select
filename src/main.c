@@ -1,9 +1,8 @@
 #include <unistd.h>
-#include <stdio.h> //
 
 #include "ft_select.h"
 
-int				main_loop(void)
+static int		core_loop(void)
 {
 	t_env		*env;
 	char		*buffer[4];
@@ -37,6 +36,6 @@ int				main(int ac, char **av)
 	if ((ret = ft_setup_env(ac - 1, av + 1)) != 0)
 		return (ret);
 	ft_toggle_term(1);
-	main_loop();
+	core_loop();
 	return (0);
 }

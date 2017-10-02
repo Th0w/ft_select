@@ -25,10 +25,7 @@ int				ft_add_handlers(t_btree **handlers)
 		|| insert_handler(handlers, FTK_DOWN, &ft_mv_down) == -1
 		|| insert_handler(handlers, FTK_RIGHT, &ft_mv_right) == -1
 		|| insert_handler(handlers, FTK_LEFT, &ft_mv_left) == -1)
-	{
-		dprintf(2, "Could not insert a callback!\n");
 		return (0);
-	}
 	return (1);
 }
 
@@ -38,9 +35,6 @@ int				ft_add_actions(t_btree **actions)
 		|| insert_handler(actions, FTK_NL, &ft_handle_nl) == -1
 		|| insert_handler(actions, FTK_SP, &ft_handle_sp) == -1
 		|| insert_handler(actions, FTK_DEL, &ft_handle_del) == -1)
-	{
-		dprintf(2, "Could not insert a callback!\n");
 		return (0);
-	}
 	return (1);
 }

@@ -4,8 +4,6 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
-# include <unistd.h> //
-# include <stdio.h> //
 
 # include <sys/ioctl.h>
 
@@ -21,6 +19,7 @@
 # define FT_EMEMALLOC ("Could not allocate memory.\n")
 # define FT_EACT ("Could not create action trees.\n")
 # define FT_ETERM ("Could not find corresponding term.\n")
+# define FT_ETTY ("Error with current TTY of Standard Output FD\n")
 
 # define FT_NOENV_CODE 2
 # define FT_MEMALLOC_CODE 3
