@@ -87,8 +87,6 @@ t_clist					*ft_clist_arg_to_list(int ac, char **av);
 t_clist					*ft_clist_move(t_clist *list, int cnt);
 char					*ft_clist_tostr_if(t_clist *list, int (*assert)());
 
-size_t					ft_selstrlen(const char *str);
-
 void					ft_toggle_style(char *style);
 void					ft_toggle_style_cnt(char *style, int cnt);
 void					ft_move_cursor(int x, int y);
