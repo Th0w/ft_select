@@ -81,7 +81,7 @@ ITEM:=\
 	ft_signals.o
 OBJ:=$(addprefix $(OBJ_D)/, $(ITEM))
 
-VPATH:=src:src/callbacks:src/bridge:inc
+VPATH:=src:src/bridge:src/callbacks:src/signals:inc
 
 ####
 # RULES
