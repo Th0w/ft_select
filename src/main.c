@@ -2,6 +2,16 @@
 
 #include "ft_select.h"
 
+static int		ft_usage(const char *name)
+{
+	tputs("\033[33m", 1, &ft_putfd0);
+	ft_putstr("usage: ");
+	tputs("\033[0m", 1, &ft_putfd0);
+	ft_putstr(name);
+	ft_putstr(" [file ...]\n");
+	return (1);
+}
+
 static int		core_loop(void)
 {
 	t_env		*env;
@@ -32,7 +42,7 @@ int				main(int ac, char **av)
 	int			ret;
 
 	if (ac == 1)
-		return (0);
+		return (ft_usage(av[0]));
 	if ((ret = ft_setup_env(ac - 1, av + 1)) != 0)
 		return (ret);
 	ft_toggle_term(1);

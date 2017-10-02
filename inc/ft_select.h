@@ -99,4 +99,6 @@ int						ft_toggle_term(int on);
 int						ft_create_term(t_env *env);
 void					ft_addsignal(void);
 
+int						ft_putfd0(int c);
+
 #endif

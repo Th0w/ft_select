@@ -1,6 +1,6 @@
 #include "ft_select.h"
 
-static int		ft_putfd0(int c)
+int				ft_putfd0(int c)
 {
 	write(STDIN_FILENO, &c, 1);
 	return (0);
