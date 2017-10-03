@@ -67,21 +67,21 @@ LIBRARIES:=\
 		   -lcurses
 
 ITEM:=\
+	ft_clist_bridge.o\
 	callback_create.o\
-	ft_style.o\
 	move.o\
 	selection.o\
-	ft_clist_bridge.o\
+	ft_helpers.o\
 	ft_intcmp.o\
 	ft_print_args.o\
 	ft_sel_env.o\
+	ft_signals.o\
+	ft_style.o\
 	ft_term.o\
-	ft_helpers.o\
-	main.o\
-	ft_signals.o
+	main.o
 OBJ:=$(addprefix $(OBJ_D)/, $(ITEM))
 
-VPATH:=src:src/bridge:src/callbacks:src/signals:inc
+VPATH:=src:src/bridge:src/callbacks:inc
 
 ####
 # RULES
