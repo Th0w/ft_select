@@ -1,23 +1,65 @@
 #include "ft_select.h"
 
+void			ft_print_padded(char *value, t_env *env, int hovered)
+{
+	size_t		len;
+
+	len = ft_strlen(value);
+	ft_putstr_fd(hovered ? "> " : "  ", STDIN_FILENO);
+	ft_putstr_fd(value, STDIN_FILENO);
+	ft_putblank_fd(env->widest - len, STDIN_FILENO);
+	ft_putstr_fd(hovered ? " <" : "  ", STDIN_FILENO);
+}
+
+void			ft_print_shrink(char *value, t_env *env, int hovered)
+{
+	size_t		len;
+	size_t		rem;
+
+	len = ft_strlen(value);
+	rem = env->col - 4;
+	ft_putstr_fd(hovered ? "> " : "  ", STDIN_FILENO);
+	if (len > rem)
+	{
+		write(STDIN_FILENO, value, rem - 3);
+		write(STDIN_FILENO, "...", 3);
+	}
+	else
+	{
+		ft_putstr_fd(value, STDIN_FILENO);
+		ft_putblank_fd(rem - len, STDIN_FILENO);
+	}
+	ft_putstr_fd(hovered ? " <" : "  ", STDIN_FILENO);
+}
+
+void			ft_print_nopad(char *value, t_env *env, int hovered)
+{
+	size_t		len;
+
+	(void)hovered;
+	len = ft_strlen(value);
+	if (len > env->col)
+	{
+		write(STDIN_FILENO, value, len - 3);
+		write(STDIN_FILENO, "...", 3);
+	}
+	else
+		write(STDIN_FILENO, value, len);
+}
+
 static void		ft_print_arg(t_clist *elem, t_env *env)
 {
 	t_arg		*arg;
-	size_t		len;
-	int			selected;
+	int			hovered;
 
 	arg = (t_arg *)(elem->content);
-	len = ft_strlen(arg->value);
-	selected = elem == env->hovered;
+	hovered = elem == env->hovered;
 	if (arg->selected == 1)
 		ft_toggle_style(FT_TC_REV);
-	if (selected)
+	if (hovered)
 		ft_toggle_style(FT_TC_ULON);
-	ft_putstr_fd(selected ? "> " : "  ", STDIN_FILENO);
-	ft_putstr_fd(arg->value, STDIN_FILENO);
-	ft_putblank_fd(env->widest - len, STDIN_FILENO);
-	ft_putstr_fd(selected ? " <" : "  ", STDIN_FILENO);
-	if (selected)
+	env->printer(arg->value, env, hovered);
+	if (hovered)
 		ft_toggle_style(FT_TC_ULOFF);
 	if (arg->selected == 1)
 		ft_toggle_style(FT_TC_CLR);

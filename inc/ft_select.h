@@ -48,7 +48,7 @@ typedef struct			s_env
 	u_short				row;
 	int					curr;
 	int					arg_per_line;
-	int					line_count;
+	void				(*printer)();
 	int					cnt;
 	t_clist				*args;
 	t_clist				*hovered;
@@ -100,5 +100,9 @@ int						ft_create_term(t_env *env);
 void					ft_addsignal(void);
 
 int						ft_putfd0(int c);
+
+void					ft_print_nopad(char *value, t_env *env, int hovered);
+void					ft_print_shrink(char *value, t_env *env, int hovered);
+void					ft_print_padded(char *value, t_env *env, int hovered);
 
 #endif

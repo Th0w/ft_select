@@ -12,6 +12,20 @@ int				ft_create_term(t_env *env)
 	return (1);
 }
 
+int				ft_calcdim(t_env *env)
+{
+	if (env->col < 8 && env->widest > 3)
+		env->printer = &ft_print_nopad;
+	else if ((env->arg_per_line = env->col / (env->widest + 4)) == 0)
+	{
+		env->arg_per_line = 1;
+		env->printer = &ft_print_shrink;
+	}
+	else
+		env->printer = &ft_print_padded;
+	return (0);
+}
+
 int				ft_toggle_term(int on)
 {
 	t_env		*env;
@@ -41,8 +55,7 @@ int				ft_setup_env(int ac, char **av)
 	ft_addsignal();
 	if ((env->args = ft_clist_arg_to_list(ac, av)) == NULL)
 		return (ft_error(FT_EMEMALLOC, FT_MEMALLOC_CODE));
+	ft_calcdim(env);
 	env->hovered = env->args;
-	env->arg_per_line = env->col / (env->widest + 4);
-	env->line_count = (int)((double)env->cnt / env->arg_per_line + .5);
 	return (0);
 }
