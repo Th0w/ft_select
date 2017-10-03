@@ -31,9 +31,14 @@ void			ft_sigresume(int signo)
 
 void			ft_sigresize(int signo)
 {
+	t_env		*env;
+
 	if (signo != SIGWINCH)
 		return ;
-	// RESIZE
+	env = ft_sel_getenv();
+	ft_setenv_dim(&env->col, &env->row);
+	ft_calcdim(env);
+	ft_print_args(env);
 }
 
 void			ft_addsignal(void)

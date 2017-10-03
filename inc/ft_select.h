@@ -105,4 +105,7 @@ void					ft_print_nopad(char *value, t_env *env, int hovered);
 void					ft_print_shrink(char *value, t_env *env, int hovered);
 void					ft_print_padded(char *value, t_env *env, int hovered);
 
+int						ft_calcdim(t_env *env);
+void					ft_setenv_dim(u_short *col, u_short *row);
+
 #endif

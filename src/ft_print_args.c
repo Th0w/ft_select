@@ -38,7 +38,9 @@ void			ft_print_nopad(char *value, t_env *env, int hovered)
 
 	(void)hovered;
 	len = ft_strlen(value);
-	if (len > env->col)
+	if (env->col < 4 && len >= 4)
+		write(STDIN_FILENO, value, env->col);
+	else if (len > env->col)
 	{
 		write(STDIN_FILENO, value, len - 3);
 		write(STDIN_FILENO, "...", 3);
