@@ -15,7 +15,7 @@ static int		ft_usage(const char *name)
 static int		core_loop(void)
 {
 	t_env		*env;
-	char		*buffer[4];
+	char		buffer[4];
 	t_btree		*node;
 	size_t		ret;
 
@@ -27,6 +27,8 @@ static int		core_loop(void)
 		*((int *)buffer) = 0;
 		if ((ret = read(0, buffer, 3)) == (size_t)(-1))
 			return (ft_sel_exit());
+		if (buffer[0] == 4)
+			break ;
 		node = btree_search(env->actions, (void *)buffer, &ft_keycmp);
 		if (node != NULL)
 		{
@@ -34,7 +36,7 @@ static int		core_loop(void)
 			ft_print_args(env);
 		}
 	}
-	ft_sel_exit();
+	return (ft_sel_exit());
 }
 
 int				main(int ac, char **av)
