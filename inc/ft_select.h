@@ -4,6 +4,7 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
+# include <unistd.h>
 
 # include <sys/ioctl.h>
 

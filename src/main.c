@@ -1,5 +1,3 @@
-#include <unistd.h>
-
 #include "ft_select.h"
 
 static int		ft_usage(const char *name)
