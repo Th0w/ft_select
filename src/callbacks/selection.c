@@ -32,7 +32,7 @@ void			ft_handle_nl(char *buffer, t_env *env)
 		ft_putendl_fd(str, STDOUT_FILENO);
 		ft_strdel(&str);
 	}
-	exit(0);
+	ft_sel_exit();
 }
 
 void			ft_handle_sp(char *buffer, t_env *env)
