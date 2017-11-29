@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:19:20 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 13:41:14 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:45:04 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ int				ft_setup_env(int ac, char **av)
 		return (ft_error(FT_EMEMALLOC, FT_MEMALLOC_CODE));
 	ft_calcdim(env);
 	env->hovered = env->args;
+	if ((env->fd = open("/dev/tty", O_WRONLY)) == -1)
+		ft_sel_exit();
 	return (0);
 }

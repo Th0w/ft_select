@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:47:21 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:40:13 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:45:29 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <curses.h>
 # include <term.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 # include <sys/stat.h>
 # include <sys/ioctl.h>
@@ -96,6 +97,7 @@ typedef struct			s_env
 	t_term				new;
 	t_btree				*actions;
 	enum e_print		mode;
+	int					fd;
 }						t_env;
 
 int						ft_intcmp(int lhs, int rhs);

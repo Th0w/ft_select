@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:32:02 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:08:08 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:25:13 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void			ft_handle_nl(char *buffer, t_env *env)
 	ft_toggle_style("ve");
 	if ((str = ft_clist_tostr_if(env->args, &is_selected)) != NULL)
 	{
-		ft_putendl_fd(str, STDOUT_FILENO);
+		ft_toggle_term(0);
+		ft_putendl_fd(str, 1);
 		ft_strdel(&str);
 	}
 	ft_sel_exit();

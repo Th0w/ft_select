@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:43:41 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:40:35 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:45:40 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int				ft_sel_exit(void)
 	btree_clean(env->actions, &free);
 	ft_clist_clear(&env->args, &free);
 	ft_toggle_term(0);
+	if (env->fd != -1)
+		close(env->fd);
 	exit(0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:48:35 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:36:38 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:26:48 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char			*ft_clist_tostr_if(t_clist *list, int (*assert)())
 			ft_strdel(&tmp);
 		}
 		curr = curr->next;
-		if (curr->next == list)
+		if (curr == list)
 			break ;
 	}
 	return (ret);

@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:23:01 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:36:43 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:30:39 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,19 @@ static t_arg	*ft_create_arg(char *path)
 	if ((ret = (t_arg *)ft_memalloc(sizeof(t_arg))) == NULL)
 		return (NULL);
 	ret->value = path;
-	if ((lstat(path, &stats)) == -1) 
+	if ((lstat(path, &stats)) == -1)
 		ret->type = ERRO;
 	else
 	{
-		if (stats.st_mode & 0040000)
+		if ((stats.st_mode & S_IFDIR) == S_IFDIR)
 			ret->type |= DIRE;
-		if (stats.st_mode & 0120000)
+		else if ((stats.st_mode & S_IFLNK) == S_IFLNK)
+		{
 			ret->type |= LINK;
+			stat(path, &stats);
+			if ((stats.st_mode & S_IFDIR) == S_IFDIR)
+				ret->type |= DIRE;
+		}
 	}
 	return (ret);
 }
@@ -65,5 +70,3 @@ t_clist			*ft_clist_arg_to_list(int ac, char **av)
 	env->cnt = i;
 	return (ret);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:09:35 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:09:36 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:44:18 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_env				*ft_sel_getenv(void)
 		ft_bzero(&env, sizeof(t_env));
 		ft_setenv_dim(&env.col, &env.row);
 		env.init = 1;
+		env.fd = -1;
 	}
 	return (&env);
 }

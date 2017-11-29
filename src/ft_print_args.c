@@ -6,65 +6,30 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:09:50 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:10:29 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 18:36:43 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void			ft_print_padded(char *value, t_env *env, int hovered)
+static int		add_color(t_env *env, t_arg *elem)
 {
-	size_t		len;
-
-	len = ft_strlen(value);
-	ft_putstr_fd(hovered ? "> " : "  ", STDIN_FILENO);
-	ft_putstr_fd(value, STDIN_FILENO);
-	ft_putblank_fd(env->widest - len, STDIN_FILENO);
-	ft_putstr_fd(hovered ? " <" : "  ", STDIN_FILENO);
-}
-
-void			ft_print_shrink(char *value, t_env *env, int hovered)
-{
-	size_t		len;
-	size_t		rem;
-
-	len = ft_strlen(value);
-	rem = env->col - 4;
-	ft_putstr_fd(hovered ? "> " : "  ", STDIN_FILENO);
-	if (len > rem)
-	{
-		write(STDIN_FILENO, value, rem - 3);
-		write(STDIN_FILENO, "...", 3);
-	}
-	else
-	{
-		ft_putstr_fd(value, STDIN_FILENO);
-		ft_putblank_fd(rem - len, STDIN_FILENO);
-	}
-	ft_putstr_fd(hovered ? " <" : "  ", STDIN_FILENO);
-}
-
-void			ft_print_nopad(char *value, t_env *env, int hovered)
-{
-	size_t		len;
-
-	(void)hovered;
-	len = ft_strlen(value);
-	if (env->col < 4 && len >= 4)
-		write(STDIN_FILENO, value, env->col);
-	else if (len > env->col)
-	{
-		write(STDIN_FILENO, value, len - 3);
-		write(STDIN_FILENO, "...", 3);
-	}
-	else
-		write(STDIN_FILENO, value, len);
+	if (elem->type == ERRO)
+		ft_putstr_fd("\033[2m", env->fd);
+	else if ((elem->type & (DIRE | LINK)) == (DIRE | LINK))
+		ft_putstr_fd("\033[32m", env->fd);
+	else if (elem->type == DIRE)
+		ft_putstr_fd("\033[36m", env->fd);
+	else if (elem->type == LINK)
+		ft_putstr_fd("\033[95m", env->fd);
+	return (elem->type != REGU);
 }
 
 static void		ft_print_arg(t_clist *elem, t_env *env)
 {
 	t_arg		*arg;
 	int			hovered;
+	int			colored;
 
 	arg = (t_arg *)(elem->content);
 	hovered = elem == env->hovered;
@@ -72,11 +37,14 @@ static void		ft_print_arg(t_clist *elem, t_env *env)
 		ft_toggle_style(FT_TC_REV);
 	if (hovered)
 		ft_toggle_style(FT_TC_ULON);
+	colored = add_color(env, arg);
 	env->printer(arg->value, env, hovered);
 	if (hovered)
 		ft_toggle_style(FT_TC_ULOFF);
 	if (arg->selected == 1)
 		ft_toggle_style(FT_TC_CLR);
+	if (colored)
+		ft_putstr_fd("\033[0m", env->fd);
 	env->curr++;
 }
 
