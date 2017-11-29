@@ -1,14 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   selection.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/29 13:32:02 by vbastion          #+#    #+#             */
+/*   Updated: 2017/11/29 17:08:08 by vbastion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 void			ft_handle_esc(char *buffer, t_env *env)
 {
-	t_btree		*node;
-
+	(void)env;
 	if (buffer[1] == 0)
 		ft_sel_exit();
-	node = btree_search(env->handlers, (void *)buffer, &ft_intptrcmp);
-	if (node != NULL)
-		((t_ptr *)(node->content))->ptr();
+	if (buffer[1] == 91 && buffer[2] > 64 && buffer[2] < 69)
+		ft_clist_move((enum e_dir)(buffer[2] - 65));
 }
 
 static int		is_selected(void *content)
@@ -47,9 +57,9 @@ void			ft_handle_sp(char *buffer, t_env *env)
 
 void			ft_handle_del(char *buffer, t_env *env)
 {
-	(void)buffer;
 	t_clist		*elem;
 
+	(void)buffer;
 	if (env->hovered->next == env->hovered)
 		ft_sel_exit();
 	else
@@ -60,6 +70,7 @@ void			ft_handle_del(char *buffer, t_env *env)
 		env->hovered = elem->next;
 		env->hovered->prev = elem->prev;
 		elem->prev->next = env->hovered;
+		env->cnt--;
 		free(elem->content);
 		free(elem);
 	}

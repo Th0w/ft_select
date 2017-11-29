@@ -68,8 +68,8 @@ LIBRARIES:=\
 
 ITEM:=\
 	ft_clist_bridge.o\
+	ft_clist_move.o\
 	callback_create.o\
-	move.o\
 	selection.o\
 	ft_helpers.o\
 	ft_intcmp.o\

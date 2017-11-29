@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_select.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/29 11:47:21 by vbastion          #+#    #+#             */
+/*   Updated: 2017/11/29 14:35:07 by vbastion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FT_SELECT_H
 # define FT_SELECT_H
 
@@ -24,6 +36,14 @@
 
 # define FT_NOENV_CODE 2
 # define FT_MEMALLOC_CODE 3
+
+enum					e_dir
+{
+	UP,
+	DOWN,
+	RIGHT,
+	LEFT
+};
 
 typedef void			(*t_keyptr)();
 
@@ -85,8 +105,9 @@ void 					ft_handle_sp(char *buffer, t_env *env);
 void					ft_handle_del(char *buffer, t_env *env);
 
 t_clist					*ft_clist_arg_to_list(int ac, char **av);
-t_clist					*ft_clist_move(t_clist *list, int cnt);
+void					ft_clist_move(enum e_dir dir);
 char					*ft_clist_tostr_if(t_clist *list, int (*assert)());
+int						ft_clist_get_dist(t_clist *lhs, t_clist *rhs);
 
 void					ft_toggle_style(char *style);
 void					ft_toggle_style_cnt(char *style, int cnt);

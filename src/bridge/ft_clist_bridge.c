@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_clist_bridge.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/29 11:48:35 by vbastion          #+#    #+#             */
+/*   Updated: 2017/11/29 17:07:31 by vbastion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 static void		*ft_clear_clist(t_clist **lst)
@@ -35,28 +47,11 @@ t_clist			*ft_clist_arg_to_list(int ac, char **av)
 	return (ret);
 }
 
-t_clist			*ft_clist_move(t_clist *list, int cnt)
+char			*ft_clist_tostr_if(t_clist *list, int (*assert)())
 {
-	t_clist		*ret;
-	int			fwd;
-
-	if (list == NULL)
-		return (NULL);
-	ret = list;
-	fwd = cnt > 0;
-	while (cnt != 0)
-	{
-		ret = fwd ? ret->next : ret->prev;
-		cnt += fwd ? -1 : 1;
-	}
-	return (ret);
-}
-
-char					*ft_clist_tostr_if(t_clist *list, int (*assert)())
-{
-	char				*ret;
-	char				*tmp;
-	t_clist				*curr;
+	char		*ret;
+	char		*tmp;
+	t_clist		*curr;
 
 	curr = list;
 	ret = NULL;
@@ -73,4 +68,20 @@ char					*ft_clist_tostr_if(t_clist *list, int (*assert)())
 			break ;
 	}
 	return (ret);
+}
+
+int				ft_clist_get_dist(t_clist *lhs, t_clist *rhs)
+{
+	int			dist;
+
+	dist = 0;
+	if (rhs != lhs)
+	{
+		while (lhs != rhs)
+		{
+			dist++;
+			lhs = lhs->next;
+		}
+	}
+	return (dist);
 }

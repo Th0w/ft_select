@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_term.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/29 13:19:20 by vbastion          #+#    #+#             */
+/*   Updated: 2017/11/29 13:41:14 by vbastion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 int				ft_create_term(t_env *env)
@@ -48,8 +60,7 @@ int				ft_setup_env(int ac, char **av)
 		return (ft_error(FT_NOENV, FT_NOENV_CODE));
 	if (tgetent(0, name) == ERR)
 		return (ft_error(FT_ETERM, 5));
-	if (ft_add_actions(&env->actions) == 0
-		|| ft_add_handlers(&env->handlers) == 0)
+	if (ft_add_actions(&env->actions) == 0)
 		return (ft_error(FT_EACT, 4));
 	ft_create_term(env);
 	ft_addsignal();

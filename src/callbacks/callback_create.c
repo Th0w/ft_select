@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   callback_create.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/29 13:39:54 by vbastion          #+#    #+#             */
+/*   Updated: 2017/11/29 13:39:56 by vbastion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 static int		insert_handler(t_btree **handlers, int key,
@@ -16,16 +28,6 @@ static int		insert_handler(t_btree **handlers, int key,
 		return (-1);
 	}
 	*handlers = btree_insert(*handlers, node, &ft_intcmp);
-	return (1);
-}
-
-int				ft_add_handlers(t_btree **handlers)
-{
-	if (insert_handler(handlers, FTK_UP, &ft_mv_up) == -1
-		|| insert_handler(handlers, FTK_DOWN, &ft_mv_down) == -1
-		|| insert_handler(handlers, FTK_RIGHT, &ft_mv_right) == -1
-		|| insert_handler(handlers, FTK_LEFT, &ft_mv_left) == -1)
-		return (0);
 	return (1);
 }
 

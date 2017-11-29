@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_args.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/11/29 17:09:50 by vbastion          #+#    #+#             */
+/*   Updated: 2017/11/29 17:10:29 by vbastion         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_select.h"
 
 void			ft_print_padded(char *value, t_env *env, int hovered)
@@ -83,7 +95,7 @@ void			ft_print_args(t_env *env)
 			break ;
 		curr = curr->next;
 		progress++;
-		if ((progress % env->arg_per_line) == 0) 
+		if ((progress % env->arg_per_line) == 0)
 			write(0, "\n", 1);
 	}
 	write(0, "\n", 1);
