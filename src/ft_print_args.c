@@ -34,6 +34,8 @@ static void		ft_print_arg(t_clist *elem, t_env *env)
 	int			colored;
 
 	arg = (t_arg *)(elem->content);
+	if (arg->hidden == 1)
+		return ;
 	hovered = elem == env->hovered;
 	if (arg->selected == 1)
 		ft_toggle_style(FT_TC_REV);

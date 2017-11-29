@@ -21,6 +21,7 @@
 
 # include <sys/stat.h>
 # include <sys/ioctl.h>
+# include <sys/param.h>
 
 # include "ft_mem.h"
 # include "ft_clist.h"
@@ -79,6 +80,7 @@ typedef struct			s_arg
 	char				*value;
 	enum e_type			type;
 	int					selected;
+	int					hidden;
 }						t_arg;
 
 typedef struct			s_env
@@ -98,6 +100,8 @@ typedef struct			s_env
 	t_btree				*actions;
 	enum e_print		mode;
 	int					fd;
+	char				buf[MAXPATHLEN];
+	int					buf_size;
 }						t_env;
 
 

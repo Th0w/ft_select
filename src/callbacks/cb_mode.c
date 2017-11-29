@@ -18,16 +18,22 @@ void					ft_toggle_col(char buf[4], t_env *env)
 	env->mode ^= (DFLT | HGHL);
 }
 
-static void				ft_clear_hidden(t_env *env)
-{
-	(void)env;
-}
-
 static void				ft_restore_mode(t_env *env)
 {
+	t_clist				*curr;
+
 	env->mode &= ~(SRCH | SRCI);
+	curr = env->args;
+	while (1)
+	{
+		((t_arg *)curr->content)->hidden = 0;
+		curr = curr->next;
+		if (curr == env->args)
+			break ;
+	}
+	ft_bzero(env->buf, MAXPATHLEN);
+	env->buf_size = 0;
 	ft_print_args(env);
-	ft_clear_hidden(env);
 }
 
 void					ft_toggle_mode(t_env *env, char mode)

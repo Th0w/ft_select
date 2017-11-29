@@ -31,12 +31,55 @@ static void		handle_nosch(char buf[4], t_env *env)
 	}
 }
 
+static void		hide_args(t_env *env)
+{
+	t_clist		*curr;
+	t_arg		*arg;
+	size_t		len;
+
+	curr = env->args;
+	while (1)
+	{
+		arg = (t_arg *)(curr->content);
+		len = ft_strlen(arg->value);
+		if (len < (size_t)env->buf_size)
+			arg->hidden = 1;
+		else
+		{
+			len = (size_t)env->buf_size;
+			arg->hidden = ft_strncmp(arg->value, env->buf, len) != 0;
+		}
+		curr = curr->next;
+		if (curr == env->args)
+			break ;
+	}
+}
+
+static void		print_prompt(t_env *env)
+{
+	hide_args(env);
+	ft_print_args(env);
+	ft_toggle_style(FT_TC_LL);
+	write(env->fd, ":", 1);
+	write(env->fd, env->buf, env->buf_size);
+}
+
 static void		handle_sch(char buf[4], t_env *env)
 {
 	if (buf[0] == FTK_ESC && buf[1] != FTK_BRA)
 		ft_toggle_mode(env, FTK_RES);
 	else if (buf[0] > 31 && buf[0] < 127)
-		write(env->fd, buf, 4);
+	{
+		env->buf[env->buf_size] = buf[0];
+		env->buf_size++;
+		print_prompt(env);
+	}
+	else if (buf[0] == FTK_DEL)
+	{
+		env->buf[env->buf_size] = '\0';
+		env->buf_size--;
+		print_prompt(env);
+	}
 	else if (buf[0] == FTK_NL)
 		ft_toggle_mode(env, FTK_RES);
 }

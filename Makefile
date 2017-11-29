@@ -86,7 +86,9 @@ ITEM:=\
 	main.o
 OBJ:=$(addprefix $(OBJ_D)/, $(ITEM))
 
-VPATH:=src:src/bridge:src/callbacks:inc
+vpath %.c src src/bridge src/callbacks
+vpath %.h inc
+HEADER:=ft_select.h ft_termcaps.h
 
 ####
 # RULES
@@ -94,7 +96,7 @@ VPATH:=src:src/bridge:src/callbacks:inc
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HEADER)
 	$(CC) $(CFLAGS) -o $(NAME) $(INCLUDES) $(LIBRARIES) $(OBJ)
 
 $(OBJ_D)/%.o: %.c
