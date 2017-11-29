@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:47:21 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 14:35:07 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:40:13 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <term.h>
 # include <unistd.h>
 
+# include <sys/stat.h>
 # include <sys/ioctl.h>
 
 # include "ft_mem.h"
@@ -45,7 +46,24 @@ enum					e_dir
 	LEFT
 };
 
+enum					e_type
+{
+	REGU = 0,
+	DIRE = 1,
+	LINK = 2,
+	ERRO = 4
+};
+
+enum					e_print
+{
+	DFLT,
+	HGHL,
+	SRCH,
+	SRCI
+};
+
 typedef void			(*t_keyptr)();
+typedef struct stat		t_stat;
 
 typedef struct termios	t_term;
 
@@ -58,6 +76,7 @@ typedef struct			s_ptr
 typedef struct			s_arg
 {
 	char				*value;
+	enum e_type			type;
 	int					selected;
 }						t_arg;
 
@@ -76,7 +95,7 @@ typedef struct			s_env
 	t_term				old;
 	t_term				new;
 	t_btree				*actions;
-	t_btree				*handlers;
+	enum e_print		mode;
 }						t_env;
 
 int						ft_intcmp(int lhs, int rhs);

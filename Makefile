@@ -69,6 +69,7 @@ LIBRARIES:=\
 ITEM:=\
 	ft_clist_bridge.o\
 	ft_clist_move.o\
+	ft_clist_get_data.o\
 	callback_create.o\
 	selection.o\
 	ft_helpers.o\

@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:43:41 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 13:43:42 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 17:40:35 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int				ft_sel_exit(void)
 
 	env = ft_sel_getenv();
 	btree_clean(env->actions, &free);
-	btree_clean(env->handlers, &free);
 	ft_clist_clear(&env->args, &free);
 	ft_toggle_term(0);
 	exit(0);
