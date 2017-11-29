@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:09:50 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 19:06:29 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 19:26:32 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int		add_color(t_env *env, t_arg *elem)
 {
-	if (env->mode != HGHL)
+	if ((env->mode & HGHL) == 0)
 		return (0);
 	if (elem->type == ERRO)
 		ft_putstr_fd("\033[2m", env->fd);

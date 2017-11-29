@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:47:21 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 19:00:48 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 19:24:51 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ enum					e_type
 
 enum					e_print
 {
-	DFLT,
-	HGHL,
-	SRCH,
-	SRCI
+	DFLT = 1,
+	HGHL = 2,
+	SRCH = 4,
+	SRCI = 8
 };
 
 typedef void			(*t_keyptr)();
