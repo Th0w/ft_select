@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:53:17 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:53:18 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 19:01:24 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,18 @@
 # define FTK_RIGHT 4414235
 # define FTK_LEFT 4479771
 
-# define FTK_D 4
 # define FTK_NL 10
 # define FTK_ESC 27
-# define FTK_SP 32
-# define FTK_BRA 91
 # define FTK_DEL 127
+# define FTK_SP ' '
+# define FTK_BRA '['
+# define FTK_A 'a'
+# define FTK_D 'd'
+# define FTK_F 'f'
+# define FTK_H 'h'
+# define FTK_L 'l'
+# define FTK_S 's'
+# define FTK_SCH ':'
 
 # define FT_TC_GETMPOS ("\033[6n")
 # define FT_TC_REV ("mr") 

@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:39:54 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 13:39:56 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 19:01:09 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,16 @@ int				ft_add_actions(t_btree **actions)
 	if (insert_handler(actions, FTK_ESC, &ft_handle_esc) == -1
 		|| insert_handler(actions, FTK_NL, &ft_handle_nl) == -1
 		|| insert_handler(actions, FTK_SP, &ft_handle_sp) == -1
-		|| insert_handler(actions, FTK_DEL, &ft_handle_del) == -1)
+		|| insert_handler(actions, FTK_DEL, &ft_handle_del) == -1
+		|| insert_handler(actions, FTK_H, &ft_toggle_col) == -1
+		|| insert_handler(actions, FTK_A, &ft_toggle_all) == -1
+		|| insert_handler(actions, FTK_L, &ft_toggle_lnk) == -1
+		|| insert_handler(actions, FTK_D, &ft_toggle_dir) == -1
+		|| insert_handler(actions, FTK_S, &ft_toggle_non) == -1
+		|| insert_handler(actions, FTK_F, &ft_toggle_fil) == -1)
+	{
+		btree_clean(*actions, &free);
 		return (0);
+	}
 	return (1);
 }

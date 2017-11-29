@@ -71,7 +71,9 @@ ITEM:=\
 	ft_clist_move.o\
 	ft_clist_get_data.o\
 	callback_create.o\
+	cb_mode.o\
 	selection.o\
+	toggle.o\
 	ft_helpers.o\
 	ft_intcmp.o\
 	ft_print_args.o\
