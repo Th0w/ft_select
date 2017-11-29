@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:47:21 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 19:24:51 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 22:46:28 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ typedef struct			s_env
 	int					fd;
 }						t_env;
 
+
 int						ft_intcmp(int lhs, int rhs);
 int						ft_intptrcmp(void *lhs, void *rhs);
 int						ft_keycmp(void *lhs, void *rhs);
@@ -120,17 +121,21 @@ void					ft_mv_up(void);
 void 					ft_mv_down(void);
 void 					ft_mv_right(void);
 void 					ft_mv_left(void);
-void					ft_handle_esc(char *buffer, t_env *env);
-void					ft_handle_nl(char *buffer, t_env *env);
-void 					ft_handle_sp(char *buffer, t_env *env);
-void					ft_handle_del(char *buffer, t_env *env);
 
-void					ft_toggle_col(char *buffer, t_env *env);
-void					ft_toggle_all(char *buffer, t_env *env);
-void					ft_toggle_lnk(char *buffer, t_env *env);
-void					ft_toggle_dir(char *buffer, t_env *env);
-void					ft_toggle_non(char *buffer, t_env *env);
-void					ft_toggle_fil(char *buffer, t_env *env);
+void					ft_handle_buf(char buf[4], t_env *env);
+void					ft_handle_esc(char buf[4], t_env *env);
+void					ft_handle_nl(char buf[4], t_env *env);
+void 					ft_handle_sp(char buf[4], t_env *env);
+void					ft_handle_del(char buf[4], t_env *env);
+
+void					ft_toggle_all(char buf[4], t_env *env);
+void					ft_toggle_lnk(char buf[4], t_env *env);
+void					ft_toggle_dir(char buf[4], t_env *env);
+void					ft_toggle_non(char buf[4], t_env *env);
+void					ft_toggle_fil(char buf[4], t_env *env);
+
+void					ft_toggle_col(char buf[4], t_env *env);
+void					ft_toggle_mode(t_env *env, char mode);
 
 t_clist					*ft_clist_arg_to_list(int ac, char **av);
 void					ft_clist_move(enum e_dir dir);

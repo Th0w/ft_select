@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:03:38 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 19:33:47 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 22:46:39 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,6 @@ static int		ft_usage(const char *name)
 	return (1);
 }
 
-static void		handle_buf(char buf[4], t_env *env)
-{
-	t_btree		*node;
-
-	node = NULL;
-	if (buf[0] == 4)
-		ft_sel_exit();
-	if (buf[0] == '/')
-	{
-		ft_toggle_col(NULL, env);
-		ft_print_args(env);
-		return ;
-	}
-	node = btree_search(env->actions, (void *)buf, &ft_keycmp);
-	if (node != NULL)
-	{
-		((t_ptr *)(node->content))->ptr(buf, env);
-		ft_print_args(env);
-	}
-}
-
 static int		core_loop(void)
 {
 	t_env		*env;
@@ -56,7 +35,7 @@ static int		core_loop(void)
 		*((int *)buf) = 0;
 		if ((ret = read(0, buf, 3)) == (size_t)(-1))
 			return (ft_sel_exit());
-		handle_buf(buf, env);
+		ft_handle_buf(buf, env);
 	}
 	return (ft_sel_exit());
 }

@@ -6,13 +6,13 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:32:02 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 18:25:13 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/29 22:47:42 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_select.h"
 
-void			ft_handle_esc(char *buffer, t_env *env)
+void			ft_handle_esc(char buffer[4], t_env *env)
 {
 	(void)env;
 	if (buffer[1] == 0)
@@ -26,7 +26,7 @@ static int		is_selected(void *content)
 	return (((t_arg *)content)->selected);
 }
 
-void			ft_handle_nl(char *buffer, t_env *env)
+void			ft_handle_nl(char buffer[4], t_env *env)
 {
 	int			one;
 	t_clist		*curr;
@@ -46,7 +46,7 @@ void			ft_handle_nl(char *buffer, t_env *env)
 	ft_sel_exit();
 }
 
-void			ft_handle_sp(char *buffer, t_env *env)
+void			ft_handle_sp(char buffer[4], t_env *env)
 {
 	t_arg		*arg;
 
@@ -56,7 +56,7 @@ void			ft_handle_sp(char *buffer, t_env *env)
 	env->hovered = env->hovered->next;
 }
 
-void			ft_handle_del(char *buffer, t_env *env)
+void			ft_handle_del(char buffer[4], t_env *env)
 {
 	t_clist		*elem;
 

@@ -78,6 +78,7 @@ ITEM:=\
 	ft_intcmp.o\
 	ft_print_args.o\
 	ft_print_ptrs.o\
+	ft_readbuf.o\
 	ft_sel_env.o\
 	ft_signals.o\
 	ft_style.o\
