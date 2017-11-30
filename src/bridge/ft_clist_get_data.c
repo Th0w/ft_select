@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:23:01 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 18:30:39 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:21:22 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static t_arg	*ft_create_arg(char *path)
 			if ((stats.st_mode & S_IFDIR) == S_IFDIR)
 				ret->type |= DIRE;
 		}
+		ret->type |= (EXEC * (access(path, X_OK) == 0));
 	}
 	return (ret);
 }

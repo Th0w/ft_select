@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:09:50 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/30 13:35:13 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:21:50 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ static int		add_color(t_env *env, t_arg *elem)
 		ft_putstr_fd("\033[2m", env->fd);
 	else if ((elem->type & (DIRE | LINK)) == (DIRE | LINK))
 		ft_putstr_fd("\033[32m", env->fd);
-	else if (elem->type == DIRE)
+	else if ((elem->type & DIRE) != 0)
 		ft_putstr_fd("\033[36m", env->fd);
-	else if (elem->type == LINK)
+	else if ((elem->type & LINK) != 0)
 		ft_putstr_fd("\033[95m", env->fd);
+	else if ((elem->type & EXEC) != 0)
+		ft_putstr_fd("\033[91m", env->fd);
 	return (elem->type != REGU);
 }
 

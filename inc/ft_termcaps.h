@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:53:17 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 22:35:52 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:45:25 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define FTK_H 'h'
 # define FTK_L 'l'
 # define FTK_S 's'
+# define FTK_X 'x'
 # define FTK_SCH ':'
 # define FTK_RES -1
 

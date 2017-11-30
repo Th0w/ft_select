@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:47:21 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/30 12:35:17 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:27:17 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ enum					e_type
 	REGU = 0,
 	DIRE = 1,
 	LINK = 2,
-	ERRO = 4
+	ERRO = 4,
+	EXEC = 8
 };
 
 enum					e_print
@@ -137,6 +138,7 @@ void					ft_toggle_lnk(char buf[4], t_env *env);
 void					ft_toggle_dir(char buf[4], t_env *env);
 void					ft_toggle_non(char buf[4], t_env *env);
 void					ft_toggle_fil(char buf[4], t_env *env);
+void					ft_toggle_exe(char buf[4], t_env *env);
 
 void					ft_toggle_col(char buf[4], t_env *env);
 void					ft_toggle_mode(t_env *env, char mode);
