@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:09:50 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 19:26:32 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:35:13 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			ft_print_args(t_env *env)
 		curr = curr->next;
 		progress++;
 		if ((progress % env->arg_per_line) == 0)
-			write(0, "\n", 1);
+			write(env->fd, "\n", 1);
 	}
-	write(0, "\n", 1);
+	write(env->fd, "\n", 1);
 }

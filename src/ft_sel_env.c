@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:09:35 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:44:18 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 12:30:35 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void				ft_setenv_dim(u_short *col, u_short *row)
 	{
 		ft_putstr_fd(FT_ETTY, STDERR_FILENO);
 		ft_toggle_term(0);
-		exit (1);
+		exit(1);
 		return ;
 	}
 	*col = win.ws_col;

@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 22:42:06 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 22:46:49 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 12:36:40 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void		hide_args(t_env *env)
 		else
 		{
 			len = (size_t)env->buf_size;
-			arg->hidden = ft_strncmp(arg->value, env->buf, len) != 0;
+			arg->hidden = ft_match(arg->value, env->buf, len, env) == 0;
 		}
 		curr = curr->next;
 		if (curr == env->args)
@@ -60,8 +60,26 @@ static void		print_prompt(t_env *env)
 	hide_args(env);
 	ft_print_args(env);
 	ft_toggle_style(FT_TC_LL);
-	write(env->fd, ":", 1);
+	write(env->fd, (env->mode & SRCH) != 0 ? ":" : "?", 1);
 	write(env->fd, env->buf, env->buf_size);
+}
+
+static void		handle_select(t_env *env)
+{
+	t_clist		*curr;
+	t_arg		*arg;
+
+	curr = env->args;
+	while (1)
+	{
+		arg = (t_arg *)(curr->content);
+		if (arg->hidden == 0)
+			arg->selected = 1;
+		curr = curr->next;
+		if (curr == env->args)
+			break ;
+	}
+	ft_toggle_mode(env, FTK_RES);
 }
 
 static void		handle_sch(char buf[4], t_env *env)
@@ -76,19 +94,21 @@ static void		handle_sch(char buf[4], t_env *env)
 	}
 	else if (buf[0] == FTK_DEL)
 	{
+		if (env->buf_size == 0)
+			return ;
 		env->buf[env->buf_size] = '\0';
 		env->buf_size--;
 		print_prompt(env);
 	}
 	else if (buf[0] == FTK_NL)
-		ft_toggle_mode(env, FTK_RES);
+		handle_select(env);
 }
 
 void			ft_handle_buf(char buf[4], t_env *env)
 {
 	if (buf[0] == 4)
 		ft_sel_exit();
-	if (buf[0] == ':' || buf[0] == '?')
+	if (((env->mode & (SRCH | SRCI)) == 0) && (buf[0] == ':' || buf[0] == '?'))
 		ft_toggle_mode(env, buf[0]);
 	else if ((env->mode & (SRCH | SRCI)) == 0)
 		handle_nosch(buf, env);

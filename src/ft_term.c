@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 13:19:20 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:45:04 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:39:12 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int				ft_create_term(t_env *env)
 {
-	if (tcgetattr(0, &env->old) == -1)
+	if (tcgetattr(env->fd, &env->old) == -1)
 		return (-1);
 	ft_memcpy((void *)&env->new, (const void *)&env->old, sizeof(t_term));
 	env->new.c_lflag &= ~(ICANON);
@@ -43,7 +43,7 @@ int				ft_toggle_term(int on)
 	t_env		*env;
 
 	env = ft_sel_getenv();
-	if (tcsetattr(0, TCSADRAIN, on ? &env->new : &env->old) == -1)
+	if (tcsetattr(env->fd, TCSAFLUSH, on ? &env->new : &env->old) == -1)
 		return (-1);
 	ft_toggle_style(on ? FT_TC_TI : FT_TC_TE);
 	ft_toggle_style(on ? FT_TC_VI : FT_TC_VE);

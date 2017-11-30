@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:47:21 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 22:46:28 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 12:35:17 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,5 +166,7 @@ void					ft_print_padded(char *value, t_env *env, int hovered);
 
 int						ft_calcdim(t_env *env);
 void					ft_setenv_dim(u_short *col, u_short *row);
+
+int						ft_match(char *str, char *buf, size_t len, t_env *env);
 
 #endif

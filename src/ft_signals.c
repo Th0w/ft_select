@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:09:41 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/29 17:09:42 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/11/30 13:44:06 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void			ft_sigpause(int signo)
 	ft_toggle_term(0);
 	tmp[0] = env->old.c_cc[VSUSP];
 	tmp[1] = '\0';
-	ioctl(env->fd, TIOCSTI, tmp);
+	ioctl(STDIN_FILENO, TIOCSTI, tmp);
 	signal(SIGTSTP, SIG_DFL);
 }
 
@@ -55,13 +55,18 @@ void			ft_sigresize(int signo)
 	ft_print_args(env);
 }
 
+void			eat_stp(int signo)
+{
+	(void)signo;
+}
+
 void			ft_addsignal(void)
 {
 	signal(SIGINT, &ft_sigexit);
 	signal(SIGQUIT, &ft_sigexit);
 	signal(SIGKILL, &ft_sigexit);
 	signal(SIGTERM, &ft_sigexit);
-	signal(SIGTSTP, &ft_sigpause);
+	signal(SIGTSTP, isatty(STDOUT_FILENO) ? &ft_sigpause : &eat_stp);
 	signal(SIGCONT, &ft_sigresume);
 	signal(SIGWINCH, &ft_sigresize);
 }

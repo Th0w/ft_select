@@ -79,6 +79,7 @@ ITEM:=\
 	toggle.o\
 	ft_helpers.o\
 	ft_intcmp.o\
+	ft_match.o\
 	ft_print_args.o\
 	ft_print_ptrs.o\
 	ft_readbuf.o\
