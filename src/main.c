@@ -18,7 +18,7 @@ static int		ft_usage(const char *name)
 
 	env = ft_sel_getenv();
 	write(env->fd, "\033[33m", 5);
-	ft_putstr("usage: ");
+	ft_putstr_fd("usage: ", env->fd);
 	write(env->fd, "\033[0m", 4);
 	ft_putstr_fd(name, env->fd);
 	ft_putstr_fd(" [file ...]\n", env->fd);

@@ -38,10 +38,9 @@ t_env				*ft_sel_getenv(void)
 	if (env.init == 0)
 	{
 		ft_bzero(&env, sizeof(t_env));
-		env.fd = open("/dev/tty", O_WRONLY);
-		if (env.fd == -1)
+		if ((env.fd = open("/dev/tty", O_WRONLY)) == -1)
 		{
-			ft_putstr_fd("TTY and/or input error\n", STDERR_FILENO);
+			ft_putstr_fd("Could not open '/dev/tty'\n", STDERR_FILENO);
 			exit(1);
 		}
 		env.init = 1;
