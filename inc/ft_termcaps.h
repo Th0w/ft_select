@@ -51,4 +51,7 @@
 # define FT_TC_CL ("cl")
 # define FT_TC_LL ("ll")
 
+# define FT_TC_RED ("\033[33m")
+# define FT_TC_CLC ("\033[0m")
+
 # endif
