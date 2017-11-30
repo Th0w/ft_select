@@ -4,6 +4,9 @@
 
 CC:=gcc
 CFLAGS:=-Wall -Wextra -Werror
+ifeq ($(SANITIZE), true)
+CFLAGS+=-fsanitize=address -g3
+endif
 
 NAME:=ft_select
 OBJ_D:=obj

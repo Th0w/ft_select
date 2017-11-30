@@ -68,7 +68,5 @@ int				ft_setup_env(int ac, char **av)
 		return (ft_error(FT_EMEMALLOC, FT_MEMALLOC_CODE));
 	ft_calcdim(env);
 	env->hovered = env->args;
-	if ((env->fd = open("/dev/tty", O_WRONLY)) == -1)
-		ft_sel_exit();
 	return (0);
 }

@@ -22,13 +22,15 @@ void			ft_sigexit(int signo)
 void			ft_sigpause(int signo)
 {
 	char		tmp[2];
+	t_env		*env;
 
 	if (signo != SIGTSTP)
 		return ;
+	env = ft_sel_getenv();
 	ft_toggle_term(0);
-	tmp[0] = ft_sel_getenv()->old.c_cc[VSUSP];
+	tmp[0] = env->old.c_cc[VSUSP];
 	tmp[1] = '\0';
-	ioctl(0, TIOCSTI, tmp);
+	ioctl(env->fd, TIOCSTI, tmp);
 	signal(SIGTSTP, SIG_DFL);
 }
 

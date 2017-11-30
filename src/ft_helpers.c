@@ -22,6 +22,7 @@ int				ft_sel_exit(void)
 	ft_toggle_term(0);
 	if (env->fd != -1)
 		close(env->fd);
+	env->fd = -1;
 	exit(0);
 	return (0);
 }

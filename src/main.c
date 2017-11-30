@@ -14,11 +14,14 @@
 
 static int		ft_usage(const char *name)
 {
-	tputs("\033[33m", 1, &ft_putfd0);
+	t_env		*env;
+
+	env = ft_sel_getenv();
+	write(env->fd, "\033[33m", 5);
 	ft_putstr("usage: ");
-	tputs("\033[0m", 1, &ft_putfd0);
-	ft_putstr(name);
-	ft_putstr(" [file ...]\n");
+	write(env->fd, "\033[0m", 4);
+	ft_putstr_fd(name, env->fd);
+	ft_putstr_fd(" [file ...]\n", env->fd);
 	return (1);
 }
 
@@ -33,7 +36,7 @@ static int		core_loop(void)
 	while (1)
 	{
 		*((int *)buf) = 0;
-		if ((ret = read(0, buf, 3)) == (size_t)(-1))
+		if ((ret = read(0, buf, 3)) == (size_t)(-1) || ret == 0)
 			return (ft_sel_exit());
 		ft_handle_buf(buf, env);
 	}

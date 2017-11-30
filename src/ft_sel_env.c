@@ -16,12 +16,15 @@ void				ft_setenv_dim(u_short *col, u_short *row)
 {
 	struct winsize	win;
 	int				ret;
+	t_env			*env;
 
-	ret = ioctl(0, TIOCGWINSZ, &win);
+	env = ft_sel_getenv();
+	ret = ioctl(env->fd, TIOCGWINSZ, &win);
 	if (ret == -1)
 	{
 		ft_putstr_fd(FT_ETTY, STDERR_FILENO);
-		ft_sel_exit();
+		ft_toggle_term(0);
+		exit (1);
 		return ;
 	}
 	*col = win.ws_col;
@@ -35,9 +38,14 @@ t_env				*ft_sel_getenv(void)
 	if (env.init == 0)
 	{
 		ft_bzero(&env, sizeof(t_env));
-		ft_setenv_dim(&env.col, &env.row);
+		env.fd = open("/dev/tty", O_WRONLY);
+		if (env.fd == -1)
+		{
+			ft_putstr_fd("TTY and/or input error\n", STDERR_FILENO);
+			exit(1);
+		}
 		env.init = 1;
-		env.fd = -1;
+		ft_setenv_dim(&env.col, &env.row);
 	}
 	return (&env);
 }
