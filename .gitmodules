@@ -1,15 +1,3 @@
-[submodule "lib/ft_mem"]
-	path = lib/ft_mem
-	url = https://github.com/th0w/ft_mem.git
-[submodule "lib/ft_clist"]
-	path = lib/ft_clist
-	url = https://github.com/th0w/ft_clist.git
 [submodule "lib/ft_array"]
 	path = lib/ft_array
 	url = https://github.com/th0w/ft_array.git
-[submodule "lib/ft_string"]
-	path = lib/ft_string
-	url = https://github.com/th0w/ft_string.git
-[submodule "lib/ft_btree"]
-	path = lib/ft_btree
-	url = https://github.com/th0w/ft_btree.git

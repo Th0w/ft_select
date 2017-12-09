@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 22:42:06 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/30 12:36:40 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/12/09 11:22:47 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,30 +28,6 @@ static void		handle_nosch(char buf[4], t_env *env)
 	{
 		((t_ptr *)(node->content))->ptr(buf, env);
 		ft_print_args(env);
-	}
-}
-
-static void		hide_args(t_env *env)
-{
-	t_clist		*curr;
-	t_arg		*arg;
-	size_t		len;
-
-	curr = env->args;
-	while (1)
-	{
-		arg = (t_arg *)(curr->content);
-		len = ft_strlen(arg->value);
-		if (len < (size_t)env->buf_size)
-			arg->hidden = 1;
-		else
-		{
-			len = (size_t)env->buf_size;
-			arg->hidden = ft_match(arg->value, env->buf, len, env) == 0;
-		}
-		curr = curr->next;
-		if (curr == env->args)
-			break ;
 	}
 }
 
