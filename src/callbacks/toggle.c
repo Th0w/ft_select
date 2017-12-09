@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 18:47:59 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/30 15:43:54 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/12/09 10:10:59 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,24 +89,6 @@ void					ft_toggle_fil(char buf[4], t_env *env)
 	{
 		arg = (t_arg *)curr->content;
 		if (arg->type == REGU)
-			arg->selected = 1;
-		curr = curr->next;
-		if (curr == env->args)
-			break ;
-	}
-}
-
-void					ft_toggle_exe(char buf[4], t_env *env)
-{
-	t_clist				*curr;
-	t_arg				*arg;
-
-	(void)buf;
-	curr = env->args;
-	while (1)
-	{
-		arg = (t_arg *)curr->content;
-		if (arg->type == EXEC)
 			arg->selected = 1;
 		curr = curr->next;
 		if (curr == env->args)

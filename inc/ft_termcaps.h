@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 17:53:17 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/30 15:45:25 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/12/09 10:08:48 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define FTK_RES -1
 
 # define FT_TC_GETMPOS ("\033[6n")
-# define FT_TC_REV ("mr") 
-# define FT_TC_CLR ("me") 
+# define FT_TC_REV ("mr")
+# define FT_TC_CLR ("me")
 # define FT_TC_ULON ("us")
 # define FT_TC_ULOFF ("ue")
 # define FT_TC_SC ("sc")
@@ -55,4 +55,4 @@
 # define FT_TC_RED ("\033[33m")
 # define FT_TC_CLC ("\033[0m")
 
-# endif
+#endif

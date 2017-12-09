@@ -77,6 +77,7 @@ ITEM:=\
 	cb_mode.o\
 	selection.o\
 	toggle.o\
+	toggle_exe.o\
 	ft_helpers.o\
 	ft_intcmp.o\
 	ft_match.o\
@@ -85,6 +86,7 @@ ITEM:=\
 	ft_readbuf.o\
 	ft_sel_env.o\
 	ft_signals.o\
+	ft_sigempty.o\
 	ft_style.o\
 	ft_term.o\
 	main.o

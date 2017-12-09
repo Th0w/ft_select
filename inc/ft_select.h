@@ -6,7 +6,7 @@
 /*   By: vbastion <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/29 11:47:21 by vbastion          #+#    #+#             */
-/*   Updated: 2017/11/30 15:27:17 by vbastion         ###   ########.fr       */
+/*   Updated: 2017/12/09 10:22:17 by vbastion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,9 @@ typedef struct			s_env
 	int					buf_size;
 }						t_env;
 
-
 int						ft_intcmp(int lhs, int rhs);
 int						ft_intptrcmp(void *lhs, void *rhs);
 int						ft_keycmp(void *lhs, void *rhs);
-
-void					ft_sigexit(int signo);
 
 int						ft_add_handlers(t_btree **handlers);
 int						ft_add_actions(t_btree **handlers);
@@ -123,14 +120,14 @@ int						ft_sel_exit(void);
 t_env					*ft_sel_getenv(void);
 
 void					ft_mv_up(void);
-void 					ft_mv_down(void);
-void 					ft_mv_right(void);
-void 					ft_mv_left(void);
+void					ft_mv_down(void);
+void					ft_mv_right(void);
+void					ft_mv_left(void);
 
 void					ft_handle_buf(char buf[4], t_env *env);
 void					ft_handle_esc(char buf[4], t_env *env);
 void					ft_handle_nl(char buf[4], t_env *env);
-void 					ft_handle_sp(char buf[4], t_env *env);
+void					ft_handle_sp(char buf[4], t_env *env);
 void					ft_handle_del(char buf[4], t_env *env);
 
 void					ft_toggle_all(char buf[4], t_env *env);
@@ -158,6 +155,7 @@ void					ft_print_args(t_env *env);
 int						ft_setup_env(int ac, char **av);
 int						ft_toggle_term(int on);
 int						ft_create_term(t_env *env);
+void					ft_sigempty(int signo);
 void					ft_addsignal(void);
 
 int						ft_putfd0(int c);
